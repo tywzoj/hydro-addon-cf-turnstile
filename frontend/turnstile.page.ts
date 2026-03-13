@@ -91,13 +91,7 @@ function renderTurnstile(
             turnstile.render(`#${elementId}`, {
                 ...options,
                 sitekey: siteKey,
-                callback: (token) => {
-                    const input = form.find("input[name='cf-turnstile-response']");
-                    if (input.length === 0) {
-                        form.append(`<input type="hidden" name="cf-turnstile-response" value="${token}">`);
-                    } else {
-                        input.val(token);
-                    }
+                callback: () => {
                     submitButton.prop("disabled", false).removeClass("disabled").val(i18n("Login"));
                 },
                 "error-callback": () => {
