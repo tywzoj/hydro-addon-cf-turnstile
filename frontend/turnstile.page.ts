@@ -1,4 +1,4 @@
-import { $, addPage, AutoloadPage, NamedPage } from "@hydrooj/ui-default";
+import { $, addPage, AutoloadPage, i18n, NamedPage } from "@hydrooj/ui-default";
 
 declare global {
     interface Window {
@@ -84,35 +84,33 @@ function renderTurnstile(
     options?: { theme?: "auto" | "light" | "dark"; size?: "normal" | "compact" | "flexible" },
 ) {
     const submitButton = form.find("input[type=submit]");
-    submitButton.prop("disabled", true).addClass("disabled").val("{{ _('Turnstile Validating') }}");
+    submitButton.prop("disabled", true).addClass("disabled").val(i18n("Turnstile Validating"));
 
-    void ensureTurnstileScript().then(() => {
-        turnstile.render(`#${elementId}`, {
-            ...options,
-            sitekey: siteKey,
-            callback: (token) => {
-                const input = form.find("input[name='cf-turnstile-response']");
-                if (input.length === 0) {
-                    form.append(`<input type="hidden" name="cf-turnstile-response" value="${token}">`);
-                } else {
-                    input.val(token);
-                }
-                submitButton.prop("disabled", false).removeClass("disabled").val("{{ _('Login') }}");
-            },
-            "error-callback": () => {
-                submitButton
-                    .prop("disabled", true)
-                    .addClass("disabled")
-                    .val("{{ _('Turnstile verification failed') }}");
-            },
-            "expired-callback": () => {
-                submitButton
-                    .prop("disabled", true)
-                    .addClass("disabled")
-                    .val("{{ _('Turnstile verification failed') }}");
-            },
+    void ensureTurnstileScript()
+        .then(() => {
+            turnstile.render(`#${elementId}`, {
+                ...options,
+                sitekey: siteKey,
+                callback: (token) => {
+                    const input = form.find("input[name='cf-turnstile-response']");
+                    if (input.length === 0) {
+                        form.append(`<input type="hidden" name="cf-turnstile-response" value="${token}">`);
+                    } else {
+                        input.val(token);
+                    }
+                    submitButton.prop("disabled", false).removeClass("disabled").val(i18n("Login"));
+                },
+                "error-callback": () => {
+                    submitButton.prop("disabled", true).addClass("disabled").val(i18n("Turnstile verification failed"));
+                },
+                "expired-callback": () => {
+                    submitButton.prop("disabled", true).addClass("disabled").val(i18n("Turnstile verification failed"));
+                },
+            });
+        })
+        .catch(() => {
+            submitButton.prop("disabled", true).addClass("disabled").val(i18n("Turnstile verification failed"));
         });
-    });
 }
 
 function createTurnstileContainer(elementId: string, form: JQuery<HTMLElement>) {
