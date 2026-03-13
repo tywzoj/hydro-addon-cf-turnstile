@@ -26,14 +26,13 @@ declare global {
 
 addPage(
     new AutoloadPage("turnstile", () => {
+        if (UserContext?._id) return;
         const siteKey = getTurnstileSiteKey();
         if (!siteKey) return;
 
-        const form = $(".dialog--signin form");
-        if (form.length === 0) return;
-
         void ensureTurnstileScript();
 
+        const form = $(".dialog--signin form");
         const elementId = "cf-turnstile-dialog";
         createTurnstileContainer(elementId, form);
         renderTurnstile(elementId, siteKey, form, {
@@ -50,7 +49,6 @@ addPage(
         void ensureTurnstileScript();
 
         const form = $("form").not(".dialog--signin form");
-
         const elementId = "cf-turnstile-main";
         createTurnstileContainer(elementId, form);
         renderTurnstile(elementId, siteKey, form);
