@@ -13,9 +13,11 @@
       {% if UiContext.turnstileSiteKey %}
       <div class="row"><div class="columns">
         <div
-          class="cf-turnstile" 
+          class="cf-turnstile"
+          appearance="interaction-only"
           data-sitekey="{{ UiContext.turnstileSiteKey }}"
           data-size="flexible"
+          data-action="register"
           data-callback="onRegisterTurnstileSuccess"
           data-error-callback="onRegisterTurnstileError"
           data-expired-callback="onRegisterTurnstileExpired"
@@ -25,7 +27,8 @@
             $("#submit").prop("disabled", false).removeClass("disabled");
           }
           function onRegisterTurnstileError() {
-            $("#submit").prop("disabled", true).addClass("disabled");
+            $("#submit").prop("disabled", true).addClass("disabled")
+              .val("{{ _('Turnstile verification failed') }}");
           }
           function onRegisterTurnstileExpired() {
             $("#submit").prop("disabled", true).addClass("disabled");
