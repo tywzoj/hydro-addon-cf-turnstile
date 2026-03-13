@@ -92,7 +92,7 @@ function renderTurnstile(
         .then(() => {
             turnstile.render(`#${elementId}`, {
                 execution: "render",
-                appearance: "interaction-only",
+                appearance: "always",
                 ...options,
                 sitekey: siteKey,
                 callback: () => {
