@@ -61,7 +61,7 @@
           <input type="hidden" name="tfa" value="">
           <input type="hidden" name="authnChallenge" value="">
           {% if UiContext.turnstileSiteKey %}
-          <input type="submit" value="{{ _('Login') }}" name="login_submit" id="login_dialog_submit" class="expanded rounded primary button">
+          <input type="submit" value="{{ _('Login') }}" name="login_submit" id="login_dialog_submit" class="expanded rounded primary button disabled" disabled>
           {% else %}
           <input type="submit" value="{{ _('Login') }}" name="login_submit" class="expanded rounded primary button">
           {% endif %}

@@ -1,5 +1,5 @@
 import type { Context, Handler } from "hydrooj";
-import { ForbiddenError, Schema, superagent, SystemModel } from "hydrooj";
+import { ForbiddenError, Schema, superagent } from "hydrooj";
 
 declare module "hydrooj" {
     export interface UiContext {
@@ -20,12 +20,12 @@ export const Config = Schema.object({
 }).description("Cloudflare Turnstile");
 
 export function apply(ctx: Context) {
-    const getHandler = (handler: Handler) => {
-        handler.UiContext.turnstileSiteKey = SystemModel.get(SETTING_SITE_KEY) as string | undefined;
+    const uiCtxHandler = (handler: Handler) => {
+        handler.UiContext.turnstileSiteKey = ctx.setting.get(SETTING_SITE_KEY) as string | undefined;
     };
 
     const postHandler = async (handler: Handler) => {
-        const secretKey = SystemModel.get(SETTING_SECRET_KEY) as string | undefined;
+        const secretKey = ctx.setting.get(SETTING_SECRET_KEY) as string | undefined;
         if (!secretKey) throw new ForbiddenError("Turnstile secret key is not configured");
         const token = handler.args["cf-turnstile-response"] as string | undefined;
 
@@ -45,7 +45,7 @@ export function apply(ctx: Context) {
         /* eslint-enable @typescript-eslint/no-unsafe-member-access */
     };
 
-    ctx.on("handler/before/#get", getHandler);
+    ctx.on("handler/before", uiCtxHandler);
     ctx.on("handler/before/UserLogin#post", postHandler);
     ctx.on("handler/before/UserRegister#post", postHandler);
 }
