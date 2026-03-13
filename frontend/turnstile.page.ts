@@ -19,11 +19,13 @@ declare global {
                 "expired-callback"?: () => void;
                 execution?: "render" | "execute";
                 appearance?: "always" | "execute" | "interaction-only";
+                action?: string;
             },
         ) => string;
     };
 }
 
+// Login dialog
 addPage(
     new AutoloadPage("turnstile", () => {
         if (UserContext?._id) return;
@@ -38,12 +40,13 @@ addPage(
         renderTurnstile(elementId, siteKey, form, {
             size: "compact",
             theme: "light",
+            action: "login",
         });
     }),
 );
 
 addPage(
-    new NamedPage(["user_login", "user_register"], () => {
+    new NamedPage(["user_login", "user_register"], (pagename) => {
         const siteKey = getTurnstileSiteKey();
         if (!siteKey) return;
 
@@ -55,6 +58,7 @@ addPage(
         renderTurnstile(elementId, siteKey, form, {
             size: "flexible",
             theme: "light",
+            action: pagename === "user_login" ? "login" : "register",
         });
     }),
 );
@@ -83,7 +87,10 @@ function renderTurnstile(
     elementId: string,
     siteKey: string,
     form: JQuery<HTMLElement>,
-    options?: Pick<Parameters<typeof turnstile.render>[1], "theme" | "size" | "execution" | "appearance">,
+    options?: Omit<
+        Parameters<typeof turnstile.render>[1],
+        "sitekey" | "callback" | "error-callback" | "expired-callback"
+    >,
 ) {
     const submitButton = form.find("input[type=submit]");
     submitButton.prop("disabled", true).addClass("disabled").val(i18n("Turnstile Validating"));
