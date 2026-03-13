@@ -955,10 +955,10 @@
     esbuild "0.25.2"
     source-map-support "^0.5.21"
 
-"@hydrooj/ui-default@^4.58.0-beta.20":
-  version "4.58.0-beta.20"
-  resolved "https://registry.yarnpkg.com/@hydrooj/ui-default/-/ui-default-4.58.0-beta.20.tgz#64675699fd295989d2a868f88688abec1aeb04ba"
-  integrity sha512-q49ZQ4rX3gJd2rZg08wH3zwQGdrbnpuzPyvjoyN0NMSuWS/4vOZY3S0XfY3dtnUpFhxbt6gTQaadoZf8E5i5BQ==
+"@hydrooj/ui-default@^4.58.0-beta.21":
+  version "4.58.0-beta.21"
+  resolved "https://registry.yarnpkg.com/@hydrooj/ui-default/-/ui-default-4.58.0-beta.21.tgz#fabf464e035f4179d7fa2c57d68793831304e9f6"
+  integrity sha512-ir2KuzvyqMc5eOG639CUUlMIcGk8Z9zZtQxyx86WWTrH+lRNUN5uNOPrDbyRPIzV5UnyPc3W9luQfMTjsHeNMQ==
   dependencies:
     "@hydrooj/common" "^0.0.7"
     ansi_up "^6.0.6"
@@ -968,7 +968,7 @@
     html-to-text "^9.0.5"
     js-yaml "^4.1.1"
     jsesc "^3.1.0"
-    katex "^0.16.28"
+    katex "^0.16.33"
     lodash "^4.17.23"
     markdown-it "^14.1.1"
     markdown-it-anchor "^9.2.0"
@@ -2972,7 +2972,7 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-katex@^0.16.28:
+katex@^0.16.33:
   version "0.16.38"
   resolved "https://registry.yarnpkg.com/katex/-/katex-0.16.38.tgz#45f7b9253ac6b6a80fd168ee893fe0209b755338"
   integrity sha512-cjHooZUmIAUmDsHBN+1n8LaZdpmbj03LtYeYPyuYB7OuloiaeaV6N4LcfjcnHVzGWjVQmKrxxTrpDcmSzEZQwQ==

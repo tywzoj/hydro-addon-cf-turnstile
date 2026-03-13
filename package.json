@@ -8,7 +8,7 @@
   "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@hydrooj/ui-default": "^4.58.0-beta.20",
+    "@hydrooj/ui-default": "^4.58.0-beta.21",
     "@types/fs-extra": "^11.0.4",
     "@types/js-yaml": "^4",
     "@types/node": "^25.3.0",
