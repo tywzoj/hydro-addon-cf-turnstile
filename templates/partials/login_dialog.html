@@ -49,6 +49,11 @@
           <a href="{{ url('user_oauth', type=v.id) }}" class="expanded rounded button">{{ _(v.text) }}</a>
         </div></div>
         {%- endfor -%}
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a {% if not model.system.get('smtp.user') %}data-lostpass href="#"{% else %}href="{{ url('user_lostpass') }}"{% endif %}>{{ _('Forgot password or username?') }}</a>
+          </div>
+        </div></div>
         {% if UiContext.turnstileSiteKey %}
         <div class="row"><div class="columns">
           <div
@@ -60,6 +65,7 @@
             data-callback="onLoginDialogTurnstileSuccess"
             data-error-callback="onLoginDialogTurnstileError"
             data-expired-callback="onLoginDialogTurnstileExpired"
+            style="margin-top: 1rem;"
           ></div>
           <script>
             function onLoginDialogTurnstileSuccess(token) {
@@ -77,11 +83,6 @@
           </script>
         </div></div>
         {% endif %}
-        <div class="row"><div class="columns">
-          <div class="supplementary text-center">
-            <a {% if not model.system.get('smtp.user') %}data-lostpass href="#"{% else %}href="{{ url('user_lostpass') }}"{% endif %}>{{ _('Forgot password or username?') }}</a>
-          </div>
-        </div></div>
       </form>
     </div>
   </div>

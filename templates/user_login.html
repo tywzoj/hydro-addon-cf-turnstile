@@ -39,6 +39,11 @@
           <a href="{{ url('user_oauth', type=v.id) }}" class="expanded rounded button inverse">{{ _(v.text) }}</a>
         </div></div>
       {%- endfor -%}
+      <div class="row"><div class="columns">
+        <div class="text-center supplementary inverse">
+          <a href="{{ url('user_lostpass') }}">{{ _('Forgot password or username?') }}</a>
+        </div>
+      </div></div>
       {% if UiContext.turnstileSiteKey %}
       <div class="row"><div class="columns">
         <div
@@ -50,6 +55,7 @@
           data-callback="onLoginTurnstileSuccess"
           data-error-callback="onLoginTurnstileError"
           data-expired-callback="onLoginTurnstileExpired"
+          style="margin-top: 1rem;"
         ></div>
         <script>
           function onLoginTurnstileSuccess(token) {
@@ -67,11 +73,6 @@
         </script>
       </div></div>
       {% endif %}
-      <div class="row"><div class="columns">
-        <div class="text-center supplementary inverse">
-          <a href="{{ url('user_lostpass') }}">{{ _('Forgot password or username?') }}</a>
-        </div>
-      </div></div>
     </form>
   </div>
 </div></div>
