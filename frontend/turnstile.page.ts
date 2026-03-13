@@ -37,6 +37,7 @@ addPage(
         createTurnstileContainer(elementId, form);
         renderTurnstile(elementId, siteKey, form, {
             size: "compact",
+            theme: "light",
         });
     }),
 );
@@ -51,7 +52,10 @@ addPage(
         const form = $("form").not(".dialog--signin form");
         const elementId = "cf-turnstile-main";
         createTurnstileContainer(elementId, form);
-        renderTurnstile(elementId, siteKey, form);
+        renderTurnstile(elementId, siteKey, form, {
+            size: "flexible",
+            theme: "light",
+        });
     }),
 );
 
@@ -79,7 +83,7 @@ function renderTurnstile(
     elementId: string,
     siteKey: string,
     form: JQuery<HTMLElement>,
-    options?: { theme?: "auto" | "light" | "dark"; size?: "normal" | "compact" | "flexible" },
+    options?: Pick<Parameters<typeof turnstile.render>[1], "theme" | "size" | "execution" | "appearance">,
 ) {
     const submitButton = form.find("input[type=submit]");
     submitButton.prop("disabled", true).addClass("disabled").val(i18n("Turnstile Validating"));
@@ -87,6 +91,8 @@ function renderTurnstile(
     void ensureTurnstileScript()
         .then(() => {
             turnstile.render(`#${elementId}`, {
+                execution: "render",
+                appearance: "interaction-only",
                 ...options,
                 sitekey: siteKey,
                 callback: () => {
