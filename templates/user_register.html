@@ -10,6 +10,16 @@
           <input name="mail" type="text" autofocus>
         </label>
       </div></div>
+      <div class="row"><div class="columns">
+        <div class="text-center">
+          {{ captcha|safe }}
+          {% if UiContext.turnstileSiteKey %}
+          <input id="submit" type="submit" value="{{ _('Turnstile Validating') }}" class="inverse expanded rounded primary button disabled" disabled>
+          {% else %}
+          <input id="submit" type="submit" value="{{ _('Send Verification Email') }}" class="inverse expanded rounded primary button">
+          {% endif %}
+        </div>
+      </div></div>
       {% if UiContext.turnstileSiteKey %}
       <div class="row"><div class="columns">
         <div
@@ -24,28 +34,20 @@
         ></div>
         <script>
           function onRegisterTurnstileSuccess(token) {
-            $("#submit").prop("disabled", false).removeClass("disabled");
+            $("#submit").prop("disabled", false).removeClass("disabled")
+              .val("{{ _('Send Verification Email') }}");
           }
           function onRegisterTurnstileError() {
             $("#submit").prop("disabled", true).addClass("disabled")
               .val("{{ _('Turnstile verification failed') }}");
           }
           function onRegisterTurnstileExpired() {
-            $("#submit").prop("disabled", true).addClass("disabled");
+            $("#submit").prop("disabled", true).addClass("disabled")
+              .val("{{ _('Turnstile verification failed') }}");
           }
         </script>
       </div></div>
       {% endif %}
-      <div class="row"><div class="columns">
-        <div class="text-center">
-          {{ captcha|safe }}
-          {% if UiContext.turnstileSiteKey %}
-          <input id="submit" type="submit" value="{{ _('Send Verification Email') }}" class="inverse expanded rounded primary button disabled" disabled>
-          {% else %}
-          <input id="submit" type="submit" value="{{ _('Send Verification Email') }}" class="inverse expanded rounded primary button">
-          {% endif %}
-        </div>
-      </div></div>
     </form>
   </div>
 </div></div>

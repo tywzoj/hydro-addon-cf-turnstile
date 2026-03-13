@@ -17,6 +17,28 @@
           <input name="password" type="password">
         </label>
       </div></div>
+      <div class="row"><div class="columns">
+        <label class="inverse material checkbox" style="color:#fff;">
+          <input type="checkbox" name="rememberme" class="checkbox">{{ _('Remember me') }}
+        </label>
+      </div></div>
+      <div class="row"><div class="columns">
+        <input type="hidden" name="tfa" value="">
+        <input type="hidden" name="authnChallenge" value="">
+        <div class="text-center">
+          {% if UiContext.turnstileSiteKey %}
+            <input type="submit" value="{{ _('Turnstile Validating') }}" name="login_submit" id="user_login_submit" class="inverse expanded rounded primary button disabled" disabled>
+          {% else %}
+            <input type="submit" value="{{ _('Login') }}" name="login_submit" class="inverse expanded rounded primary button">
+          {% endif %}
+        </div>
+      </div></div>
+      {% endif %}
+      {%- for v in handler.loginMethods -%}
+        <div class="row"><div class="columns">
+          <a href="{{ url('user_oauth', type=v.id) }}" class="expanded rounded button inverse">{{ _(v.text) }}</a>
+        </div></div>
+      {%- endfor -%}
       {% if UiContext.turnstileSiteKey %}
       <div class="row"><div class="columns">
         <div
@@ -31,40 +53,20 @@
         ></div>
         <script>
           function onLoginTurnstileSuccess(token) {
-            $("#user_login_submit").prop("disabled", false).removeClass("disabled");
+            $("#user_login_submit").prop("disabled", false).removeClass("disabled")
+                .val("{{ _('Login') }}");
           }
           function onLoginTurnstileError() {
             $("#user_login_submit").prop("disabled", true).addClass("disabled")
                 .val("{{ _('Turnstile verification failed') }}");
           }
           function onLoginTurnstileExpired() {
-            $("#user_login_submit").prop("disabled", true).addClass("disabled");
+            $("#user_login_submit").prop("disabled", true).addClass("disabled")
+              .val("{{ _('Turnstile verification failed') }}");
           }
         </script>
       </div></div>
       {% endif %}
-      <div class="row"><div class="columns">
-        <label class="inverse material checkbox" style="color:#fff;">
-          <input type="checkbox" name="rememberme" class="checkbox">{{ _('Remember me') }}
-        </label>
-      </div></div>
-      <div class="row"><div class="columns">
-        <input type="hidden" name="tfa" value="">
-        <input type="hidden" name="authnChallenge" value="">
-        <div class="text-center">
-          {% if UiContext.turnstileSiteKey %}
-            <input type="submit" value="{{ _('Login') }}" name="login_submit" id="user_login_submit" class="inverse expanded rounded primary button disabled" disabled>
-          {% else %}
-            <input type="submit" value="{{ _('Login') }}" name="login_submit" class="inverse expanded rounded primary button">
-          {% endif %}
-        </div>
-      </div></div>
-      {% endif %}
-      {%- for v in handler.loginMethods -%}
-        <div class="row"><div class="columns">
-          <a href="{{ url('user_oauth', type=v.id) }}" class="expanded rounded button inverse">{{ _(v.text) }}</a>
-        </div></div>
-      {%- endfor -%}
       <div class="row"><div class="columns">
         <div class="text-center supplementary inverse">
           <a href="{{ url('user_lostpass') }}">{{ _('Forgot password or username?') }}</a>

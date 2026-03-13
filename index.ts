@@ -20,6 +20,7 @@ export const enum CE_String {
     SECRET_KEY_DESC = "Cloudflare Turnstile Secret Key",
     ValidationFailed = "Turnstile verification failed",
     SecretKeyNotConfigured = "Turnstile secret key is not configured",
+    Validating = "Turnstile Validating",
 }
 
 export const strings: Record<string, Record<CE_String, string>> = {
@@ -29,6 +30,7 @@ export const strings: Record<string, Record<CE_String, string>> = {
         [CE_String.SECRET_KEY_DESC]: "Cloudflare Turnstile 服务端密钥",
         [CE_String.ValidationFailed]: "Turnstile 人机验证失败",
         [CE_String.SecretKeyNotConfigured]: "Turnstile 密钥未配置",
+        [CE_String.Validating]: "正在人机验证...",
     },
     zh_TW: {
         [CE_String.CF_TURNSTILE_TITLE]: "Cloudflare Turnstile 人機驗證",
@@ -36,6 +38,7 @@ export const strings: Record<string, Record<CE_String, string>> = {
         [CE_String.SECRET_KEY_DESC]: "Cloudflare Turnstile 服務端密鑰",
         [CE_String.ValidationFailed]: "Turnstile 人機驗證失敗",
         [CE_String.SecretKeyNotConfigured]: "Turnstile 密鑰未配置",
+        [CE_String.Validating]: "正在人機驗證...",
     },
     en: {
         [CE_String.CF_TURNSTILE_TITLE]: "Cloudflare Turnstile",
@@ -43,6 +46,7 @@ export const strings: Record<string, Record<CE_String, string>> = {
         [CE_String.SECRET_KEY_DESC]: "Cloudflare Turnstile Secret Key",
         [CE_String.ValidationFailed]: "Turnstile verification failed",
         [CE_String.SecretKeyNotConfigured]: "Turnstile secret key is not configured",
+        [CE_String.Validating]: "Turnstile Validating",
     },
 };
 
