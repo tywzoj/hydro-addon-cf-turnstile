@@ -36,7 +36,9 @@ addPage(
 
         const elementId = "cf-turnstile-dialog";
         createTurnstileContainer(elementId, form);
-        renderTurnstile(elementId, siteKey, form);
+        renderTurnstile(elementId, siteKey, form, {
+            size: "compact",
+        });
     }),
 );
 
@@ -63,13 +65,11 @@ function ensureTurnstileScript() {
     if (window.turnstilePromise) return window.turnstilePromise;
 
     window.turnstilePromise = new Promise((resolve, reject) => {
+        window.onTurnstileLoad = () => resolve();
         const script = document.createElement("script");
         script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad";
         script.async = true;
         script.defer = true;
-        window.onTurnstileLoad = () => {
-            resolve();
-        };
         script.onerror = () => reject(new Error("Failed to load Turnstile script"));
         document.head.appendChild(script);
     });
