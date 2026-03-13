@@ -15,7 +15,7 @@ const SETTING_SITE_KEY = `${packageJson.name}.${SITE_KEY}`;
 const SETTING_SECRET_KEY = `${packageJson.name}.${SECRET_KEY}`;
 
 export const enum CE_String {
-    CF_TURNSTILE_TITLE = "cf-turnstile-response",
+    CF_TURNSTILE_TITLE = "Cloudflare Turnstile",
     SITE_KEY_DESC = "Cloudflare Turnstile Site Key",
     SECRET_KEY_DESC = "Cloudflare Turnstile Secret Key",
     ValidationFailed = "Turnstile verification failed",
