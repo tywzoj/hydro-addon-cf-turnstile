@@ -4,7 +4,7 @@ This addon integrates Cloudflare's Turnstile CAPTCHA into [Hydro](https://github
 
 ## Installation
 
-1. Clone the repository
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/tywzoj/hydro-addon-cf-turnstile.git
@@ -13,7 +13,7 @@ This addon integrates Cloudflare's Turnstile CAPTCHA into [Hydro](https://github
 2. Apply the addon to your Hydro instance:
 
     ```bash
-    hydrooj addon add /path/to/hydro-addon-domain-extension
+    hydrooj addon add /path/to/hydro-addon-cf-turnstile
     pm2 restart hydrooj
     ```
 
