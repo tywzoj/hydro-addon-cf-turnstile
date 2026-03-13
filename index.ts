@@ -23,7 +23,7 @@ export const enum CE_String {
     Validating = "Turnstile Validating",
 }
 
-export const strings: Record<string, Record<CE_String, string>> = {
+const strings: Record<string, Record<CE_String, string>> = {
     zh: {
         [CE_String.CF_TURNSTILE_TITLE]: "Cloudflare Turnstile 人机验证",
         [CE_String.SITE_KEY_DESC]: "Cloudflare Turnstile 网站密钥",
@@ -56,6 +56,10 @@ export const Config = Schema.object({
 }).description(CE_String.CF_TURNSTILE_TITLE);
 
 export function apply(ctx: Context) {
+    for (const [lang, strMap] of Object.entries(strings)) {
+        ctx.i18n.load(lang, strMap);
+    }
+
     const uiCtxHandler = (handler: Handler) => {
         handler.UiContext.turnstileSiteKey = ctx.setting.get(SETTING_SITE_KEY) as string | undefined;
     };
